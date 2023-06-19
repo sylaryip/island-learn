@@ -18,7 +18,7 @@ export function pluginIndexHtml(): Plugin {
     },
     configureServer(server) {
       return () => {
-        server.middlewares.use(async (req, res) => {
+        server.middlewares.use(async (req, res, next) => {
           // 1. 读取 template.html 内容
           let content = await readFile(DEFAULT_TEMPLATE_PATH, 'utf-8');
           content = await server.transformIndexHtml(
