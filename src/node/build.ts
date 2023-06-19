@@ -1,43 +1,42 @@
+import pluginReact from '@vitejs/plugin-react';
 import fs from 'fs-extra';
-import ora from 'ora';
-import { join } from 'path';
+import path from 'path';
 import type { RollupOutput } from 'rollup';
+import { SiteConfig } from 'shared/types';
 import { InlineConfig, build as viteBuild } from 'vite';
 import { CLIENT_ENTRY_PATH, SERVER_ENTRY_PATH } from './constants';
+import { pluginConfig } from './plugin-island/config';
 
-export async function bundle(root: string) {
-  try {
-    const resolveViteConfig = (isServer: boolean): InlineConfig => {
-      return {
-        mode: 'production',
-        root,
-        build: {
-          ssr: isServer,
-          outDir: isServer ? '.temp' : 'build',
-          rollupOptions: {
-            input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
-            output: {
-              format: isServer ? 'cjs' : 'esm'
-            }
-          }
+export async function bundle(root: string, config: SiteConfig) {
+  const resolveViteConfig = (isServer: boolean): InlineConfig => ({
+    mode: 'production',
+    root,
+    plugins: [pluginReact(), pluginConfig(config)],
+    ssr: {
+      noExternal: ['react-router-dom']
+    },
+    build: {
+      minify: false,
+      ssr: isServer,
+      outDir: isServer ? path.join(root, '.temp') : 'build',
+      rollupOptions: {
+        input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
+        output: {
+          format: isServer ? 'cjs' : 'esm'
         }
-      };
-    };
-    const clientBuild = async () => {
-      return viteBuild(resolveViteConfig(false));
-    };
+      }
+    }
+  });
+  // const spinner = ora();
+  // spinner.start(`Building client + server bundles...`);
 
-    const serverBuild = async () => {
-      return viteBuild(resolveViteConfig(true));
-    };
-
-    const spinner = ora();
-    spinner.start('Building client + server bundles...');
+  try {
     const [clientBundle, serverBundle] = await Promise.all([
-      clientBuild(),
-      serverBuild()
+      // client build
+      viteBuild(resolveViteConfig(false)),
+      // server build
+      viteBuild(resolveViteConfig(true))
     ]);
-    spinner.succeed('Build client + server bundles done.');
     return [clientBundle, serverBundle] as [RollupOutput, RollupOutput];
   } catch (e) {
     console.log(e);
@@ -64,16 +63,20 @@ async function renderPage(
 </body>
 </html>
 `.trim();
-  await fs.writeFile(join(root, 'build', 'index.html'), html);
-  await fs.remove(join(root, '.temp'));
+  await fs.writeFile(path.join(root, 'build', 'index.html'), html);
+  await fs.remove(path.join(root, '.temp'));
 }
 
-export async function build(root: string) {
+export async function build(root: string = process.cwd(), config: SiteConfig) {
   // 1. bundle - client + server
-  const [clientBundle] = await bundle(root);
+  const [clientBundle] = await bundle(root, config);
   // 2. 引入 server-entry
-  const serverEntryPath = join(process.cwd(), root, '.temp', 'ssr-entry.js');
+  const serverEntryPath = path.join(root, '.temp', 'ssr-entry.js');
   // 3. 服务端渲染，产出 HTML
   const { render } = await import(serverEntryPath);
-  await renderPage(render, root, clientBundle);
+  try {
+    await renderPage(render, root, clientBundle);
+  } catch (e) {
+    console.log('Render page error.\n', e);
+  }
 }
