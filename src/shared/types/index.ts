@@ -52,6 +52,8 @@ export interface FrontMatter {
   pageType?: PageType;
   sidebar?: boolean;
   outline?: boolean;
+  features?: Feature[];
+  hero?: Hero;
 }
 
 export interface Header {
@@ -70,7 +72,7 @@ export interface PageData {
 
 export interface PageModule {
   default: ComponentType;
-  FrontMatter?: FrontMatter;
+  frontmatter?: FrontMatter;
   [key: string]: unknown;
 }
 
@@ -93,15 +95,4 @@ export interface Hero {
     link: string;
     theme: 'brand' | 'alt';
   }[];
-}
-
-export interface FrontMatter {
-  title?: string;
-  description?: string;
-  pageType?: PageType;
-  sidebar?: boolean;
-  outline?: boolean;
-  // 增加 features 和 hero 的类型
-  features?: Feature[];
-  hero?: Hero;
 }
