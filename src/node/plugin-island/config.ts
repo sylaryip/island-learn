@@ -1,7 +1,9 @@
-import { Plugin } from 'vite';
-import { SiteConfig } from 'shared/types/index';
+import fs from 'fs-extra';
+import { PACKAGE_ROOT, PUBLIC_DIR } from 'node/constants';
 import { join, relative } from 'path';
-import { PACKAGE_ROOT } from 'node/constants';
+import { SiteConfig } from 'shared/types/index';
+import sirv from 'sirv';
+import { Plugin } from 'vite';
 
 const SITE_DATA_ID = 'island:site-data';
 
@@ -10,7 +12,7 @@ export function pluginConfig(
   restart?: () => Promise<void>
 ): Plugin {
   return {
-    name: 'island:site-data',
+    name: 'island:config',
     resolveId(id) {
       if (id === SITE_DATA_ID) {
         return '\0' + SITE_DATA_ID;
@@ -23,6 +25,7 @@ export function pluginConfig(
     },
     config() {
       return {
+        root: PACKAGE_ROOT,
         resolve: {
           alias: {
             '@runtime': join(PACKAGE_ROOT, 'src', 'runtime', 'index.ts')
@@ -45,6 +48,12 @@ export function pluginConfig(
         );
 
         await restart();
+      }
+    },
+    configureServer(server) {
+      const publicDir = join(config.root, PUBLIC_DIR);
+      if (fs.pathExistsSync(publicDir)) {
+        server.middlewares.use(sirv(publicDir));
       }
     }
   };

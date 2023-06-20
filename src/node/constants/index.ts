@@ -1,6 +1,7 @@
 import * as path from 'path';
 
 export const PACKAGE_ROOT = path.join(__dirname, '..');
+export const PUBLIC_DIR = 'public';
 
 export const CLIENT_ENTRY_PATH = path.join(
   PACKAGE_ROOT,

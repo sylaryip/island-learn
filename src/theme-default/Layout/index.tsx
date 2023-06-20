@@ -1,21 +1,22 @@
 import { usePageData } from '@runtime';
 import { Nav } from '../components/Nav';
 import { HomeLayout } from './HomeLayout';
+import { DocLayout } from './DocLayout';
 
 import 'uno.css';
 import '../styles/base.css';
 import '../styles/vars.css';
+import '../styles/doc.css';
 
 export function Layout() {
   const pageData = usePageData();
   const { pageType } = pageData;
 
   const getContent = () => {
-    console.log(pageData);
     if (pageType === 'home') {
       return <HomeLayout />;
     } else if (pageType === 'doc') {
-      return <div>正文内容</div>;
+      return <DocLayout />;
     } else {
       return <div>404 页面</div>;
     }
@@ -24,7 +25,13 @@ export function Layout() {
   return (
     <div>
       <Nav />
-      {getContent()}
+      <section
+        style={{
+          paddingTop: 'var(--island-nav-height)'
+        }}
+      >
+        {getContent()}
+      </section>
     </div>
   );
 }

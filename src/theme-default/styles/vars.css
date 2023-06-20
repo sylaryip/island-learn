@@ -5,6 +5,9 @@
  * using these colors directly in the theme but rather use "Colors Theme"
  * instead because those are "Theme (light or dark)" dependant.
  * -------------------------------------------------------------------------- */
+:root {
+  --island-aside-width: 268px;
+}
 
 :root {
   --island-c-white: #ffffff;
