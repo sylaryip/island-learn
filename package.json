@@ -32,6 +32,7 @@
     "@playwright/test": "1.26.1",
     "@types/fs-extra": "^11.0.1",
     "@types/hast": "^2.3.4",
+    "@types/lodash": "^4.14.195",
     "@types/mdast": "^3.0.11",
     "@types/node": "^20.3.1",
     "@types/react": "^18.2.12",
