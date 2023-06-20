@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prepare": "husky install",
-    "start": "tsup --watch",
+    "dev": "tsup --watch",
     "build": "tsup",
     "preview": "cd build && serve .",
     "lint": "eslint --fix --ext .ts,.tsx,.js,.jsx ./",
@@ -27,6 +27,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.5",
     "@commitlint/config-conventional": "^17.6.5",
+    "@iconify-json/carbon": "^1.1.18",
     "@loadable/component": "^5.15.3",
     "@playwright/test": "1.26.1",
     "@types/fs-extra": "^11.0.1",
@@ -50,6 +51,7 @@
     "remark-mdx": "^2.3.0",
     "remark-stringify": "^10.0.3",
     "rollup": "^3.25.1",
+    "sass": "^1.63.4",
     "tsup": "^7.0.0",
     "tsx": "^3.12.7",
     "typescript": "^5.1.3",
@@ -82,6 +84,7 @@
     "remark-rehype": "^10.1.0",
     "shiki": "^0.14.2",
     "unified": "^10.1.2",
+    "unocss": "^0.53.1",
     "vite": "^3.1.4"
   }
 }
