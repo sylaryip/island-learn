@@ -2,19 +2,27 @@
 title: 'custom title'
 ---
 
+import Counter from './Counter.tsx';
+
+<Counter />
+
 # GFM
 
-## Autolink literals
+23123132
+
+## [Autolink](/index) literals
 
 www.example.com, https://example.com, and contact@example.com.
 
 ## Footnote
 
+123
+
 A note[^1]
 
 [^1]: Big note.
 
-## Strikethrough
+## Strike `through`
 
 ~one~ or ~~two~~ tildes.
 
@@ -25,6 +33,7 @@ A note[^1]
 | 1   | 2   |   3 |  4  |
 
 ## Tasklist
+
 - [ ] to do
 - [x] done
 
@@ -36,4 +45,3 @@ export async function pluginMdx(): Promise<Plugin[]> {
   return [await pluginMdxRollup()];
 }
 ```
-aaasssdddddddfdfd
