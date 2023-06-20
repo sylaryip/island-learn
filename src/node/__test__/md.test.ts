@@ -6,7 +6,7 @@ import { unified } from 'unified';
 import { describe, expect, test } from 'vitest';
 import { rehypePluginPreWrapper } from '../plugin-mdx/rehypePlugins/preWrapper';
 import { rehypePluginShiki } from '../plugin-mdx/rehypePlugins/shiki';
-import { remarkPluginToc } from '../plugin-mdx/rehypePlugins/toc';
+import { remarkPluginToc } from '../plugin-mdx/remarkPlugins/toc';
 import remarkMdx from 'remark-mdx';
 import remarkStringify from 'remark-stringify';
 
