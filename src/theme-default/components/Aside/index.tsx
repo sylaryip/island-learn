@@ -1,14 +1,16 @@
 import { useEffect, useRef } from 'react';
-import { Header } from 'shared/types';
+import { Header } from 'shared/types/index';
 import { bindingAsideScroll, scrollToTarget } from '../../logic/asideScroll';
+import { useHeaders } from '../../logic/useHeaders';
 
 interface AsideProps {
   headers: Header[];
 }
 
 export function Aside(props: AsideProps) {
-  const { headers } = props;
-  const hasOutline = headers?.length > 0;
+  const { headers: rawHeader = [] } = props;
+  const headers = useHeaders(rawHeader);
+  const hasOutline = headers.length > 0;
   const markerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

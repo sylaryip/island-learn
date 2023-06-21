@@ -20,3 +20,5 @@ export const SERVER_ENTRY_PATH = path.join(
 export const DEFAULT_TEMPLATE_PATH = path.join(PACKAGE_ROOT, 'template.html');
 
 export const MD_REGEX = /\.mdx?$/;
+
+export const MASK_SPLITTER = '!!ISLAND!!';

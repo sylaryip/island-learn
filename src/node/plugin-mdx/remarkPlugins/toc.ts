@@ -6,8 +6,6 @@ import type { Program } from 'estree-jsx';
 import type { Plugin } from 'unified';
 import { visit } from 'unist-util-visit';
 
-const slugger = new Slugger();
-
 interface TocItem {
   id: string;
   text: string;
@@ -23,6 +21,8 @@ interface ChildNode {
 export const remarkPluginToc: Plugin<[], Root> = () => {
   return (tree) => {
     const toc: TocItem[] = [];
+    const slugger = new Slugger();
+
     visit(tree, 'heading', (node) => {
       if (!node.depth || !node.children) {
         return;
