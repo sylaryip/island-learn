@@ -1,10 +1,7 @@
-lockfileVersion: '6.0'
+lockfileVersion: 5.4
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
+specifiers:
+  islandjs: ../../..
 
 dependencies:
-  island-dev:
-    specifier: ../../..
-    version: link:../../..
+  islandjs: link:../../..

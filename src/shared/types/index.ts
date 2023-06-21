@@ -1,5 +1,11 @@
+import { ComponentType } from 'react';
 import { UserConfig as ViteConfiguration } from 'vite';
-import type { ComponentType } from 'react';
+
+export interface Header {
+  id: string;
+  text: string;
+  depth: number;
+}
 
 export type NavItemWithLink = {
   text: string;
@@ -41,41 +47,9 @@ export interface SiteConfig {
   root: string;
   configPath: string;
   siteData: UserConfig;
-  userConfigDeps: string[];
 }
 
 export type PageType = 'home' | 'doc' | 'custom' | '404';
-
-export interface FrontMatter {
-  title?: string;
-  description?: string;
-  pageType?: PageType;
-  sidebar?: boolean;
-  outline?: boolean;
-  features?: Feature[];
-  hero?: Hero;
-}
-
-export interface Header {
-  id: string;
-  text: string;
-  depth: number;
-}
-
-export interface PageData {
-  siteData: UserConfig;
-  pagePath: string;
-  frontmatter: FrontMatter;
-  pageType: PageType;
-  toc?: Header[];
-}
-
-export interface PageModule {
-  default: ComponentType;
-  frontmatter?: FrontMatter;
-  toc?: Header[];
-  [key: string]: unknown;
-}
 
 export interface Feature {
   icon: string;
@@ -97,3 +71,32 @@ export interface Hero {
     theme: 'brand' | 'alt';
   }[];
 }
+
+export interface FrontMatter {
+  title?: string;
+  description?: string;
+  pageType?: PageType;
+  sidebar?: boolean;
+  outline?: boolean;
+  features?: Feature[];
+  hero?: Hero;
+}
+
+export interface PageData {
+  siteData: UserConfig;
+  pagePath: string;
+  frontmatter: FrontMatter;
+  pageType: PageType;
+  toc?: Header[];
+}
+
+export interface PageModule {
+  default: ComponentType;
+  frontmatter?: FrontMatter;
+  toc?: Header[];
+  [key: string]: unknown;
+}
+
+export type PropsWithIsland = {
+  __island?: boolean;
+};

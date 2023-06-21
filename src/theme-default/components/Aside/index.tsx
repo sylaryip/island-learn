@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import { Header } from 'shared/types/index';
+import { Header, PropsWithIsland } from 'shared/types';
+import { useRef, useEffect } from 'react';
 import { bindingAsideScroll, scrollToTarget } from '../../logic/asideScroll';
 import { useHeaders } from '../../logic/useHeaders';
 
@@ -7,9 +7,9 @@ interface AsideProps {
   headers: Header[];
 }
 
-export function Aside(props: AsideProps) {
-  const { headers: rawHeader = [] } = props;
-  const headers = useHeaders(rawHeader);
+export function Aside(props: AsideProps & PropsWithIsland) {
+  const { headers: rawHeaders = [] } = props;
+  const headers = useHeaders(rawHeaders);
   const hasOutline = headers.length > 0;
   const markerRef = useRef<HTMLDivElement>(null);
 
@@ -43,7 +43,12 @@ export function Aside(props: AsideProps) {
   };
 
   return (
-    <div flex="~ col 1" style={{ width: 'var(--island-aside-width)' }}>
+    <div
+      flex="~ col 1"
+      style={{
+        width: 'var(--island-aside-width)'
+      }}
+    >
       <div>
         {hasOutline && (
           <div

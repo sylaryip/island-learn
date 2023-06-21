@@ -12,7 +12,6 @@ describe('RouteService', async () => {
       ...item,
       absolutePath: item.absolutePath.replace(testDir, 'TEST_DIR')
     }));
-
     expect(routeMeta).toMatchInlineSnapshot(`
       [
         {
@@ -28,9 +27,8 @@ describe('RouteService', async () => {
   });
 
   test('generate routes code', async () => {
-    expect(
-      routeService.generateRoutesCode(false).replaceAll(testDir, 'TEST_DIR')
-    ).toMatchInlineSnapshot(`
+    expect(routeService.generateRoutesCode().replaceAll(testDir, 'TEST_DIR'))
+      .toMatchInlineSnapshot(`
       "
       import React from 'react';
       import loadable from '@loadable/component';

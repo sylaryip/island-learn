@@ -1,7 +1,7 @@
-import fs from 'fs-extra';
 import { resolve } from 'path';
+import fs from 'fs-extra';
 import { loadConfigFromFile } from 'vite';
-import { SiteConfig, UserConfig } from '../shared/types';
+import { SiteConfig, UserConfig } from '../shared/types/index';
 
 type RawConfig =
   | UserConfig
@@ -10,17 +10,13 @@ type RawConfig =
 
 function getUserConfigPath(root: string) {
   try {
-    const supportConfigFile = ['config.ts', 'config.js'];
-    const configPath = supportConfigFile
+    const supportConfigFiles = ['config.ts', 'config.js'];
+    const configPath = supportConfigFiles
       .map((file) => resolve(root, file))
       .find(fs.pathExistsSync);
-
-    if (configPath === undefined) {
-      throw new Error('Config file not found.');
-    }
     return configPath;
   } catch (e) {
-    console.error(`Failed to resolve config: ${e}`);
+    console.error(`Failed to load user config: ${e}`);
     throw e;
   }
 }
@@ -30,36 +26,27 @@ export async function resolveUserConfig(
   command: 'serve' | 'build',
   mode: 'development' | 'production'
 ) {
-  // 1. 获取配置文件路径， 支持 js ts
+  // 1. 获取配置文件路径，支持 js、ts 格式
   const configPath = getUserConfigPath(root);
-  // 2. 读取配置文件内容
-  const result = await loadConfigFromFile(
-    {
-      command,
-      mode
-    },
-    configPath,
-    root
-  );
+  // 2. 解析配置文件
+  const result = await loadConfigFromFile({ command, mode }, configPath, root);
+
   if (result) {
     const { config: rawConfig = {} as RawConfig } = result;
-    let userConfigDeps = result.dependencies;
-    userConfigDeps = userConfigDeps
-      .filter((file) => file.startsWith(root))
-      .map(
-        (file) => resolve(root.replace(new RegExp(`${root}$`), '')) + `/${file}`
-      );
-
+    // 三种情况:
+    // 1. object
+    // 2. promise
+    // 3. function
     const userConfig = await (typeof rawConfig === 'function'
       ? rawConfig()
       : rawConfig);
-    return [configPath, userConfig, userConfigDeps] as const;
+    return [configPath, userConfig] as const;
   } else {
-    return [configPath, {} as UserConfig, [] as string[]] as const;
+    return [configPath, {} as UserConfig] as const;
   }
 }
 
-function resolveSiteData(userConfig: UserConfig): UserConfig {
+export function resolveSiteData(userConfig: UserConfig): UserConfig {
   return {
     title: userConfig.title || 'Island.js',
     description: userConfig.description || 'SSG Framework',
@@ -73,16 +60,11 @@ export async function resolveConfig(
   command: 'serve' | 'build',
   mode: 'development' | 'production'
 ): Promise<SiteConfig> {
-  const [configPath, userConfig, userConfigDeps] = await resolveUserConfig(
-    root,
-    command,
-    mode
-  );
+  const [configPath, userConfig] = await resolveUserConfig(root, command, mode);
   const siteConfig: SiteConfig = {
     root,
-    configPath,
-    siteData: resolveSiteData(userConfig as UserConfig),
-    userConfigDeps
+    configPath: configPath,
+    siteData: resolveSiteData(userConfig as UserConfig)
   };
   return siteConfig;
 }

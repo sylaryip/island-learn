@@ -1,6 +1,6 @@
 import { Feature } from 'shared/types';
 
-export default function HomeFeatures(props: { features: Feature[] }) {
+export function HomeFeature(props: { features: Feature[] }) {
   return (
     <div className="max-w-1152px" m="auto" flex="~ wrap" justify="between">
       {props.features.map((feature) => {

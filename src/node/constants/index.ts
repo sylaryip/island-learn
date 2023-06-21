@@ -1,23 +1,14 @@
-import * as path from 'path';
+import { join } from 'path';
 
-export const PACKAGE_ROOT = path.join(__dirname, '..');
-export const PUBLIC_DIR = 'public';
+export const PACKAGE_ROOT = join(__dirname, '..');
 
-export const CLIENT_ENTRY_PATH = path.join(
-  PACKAGE_ROOT,
-  'src',
-  'runtime',
-  'client-entry.tsx'
-);
+export const RUNTIME_PATH = join(PACKAGE_ROOT, 'src', 'runtime');
 
-export const SERVER_ENTRY_PATH = path.join(
-  PACKAGE_ROOT,
-  'src',
-  'runtime',
-  'ssr-entry.tsx'
-);
+export const CLIENT_ENTRY_PATH = join(RUNTIME_PATH, 'client-entry.tsx');
 
-export const DEFAULT_TEMPLATE_PATH = path.join(PACKAGE_ROOT, 'template.html');
+export const SERVER_ENTRY_PATH = join(RUNTIME_PATH, 'ssr-entry.tsx');
+
+export const DEFAULT_HTML_PATH = join(PACKAGE_ROOT, 'template.html');
 
 export const MD_REGEX = /\.mdx?$/;
 

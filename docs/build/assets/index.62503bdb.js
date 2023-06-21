@@ -1,4 +1,4 @@
-import { a as jsx, j as jsxs, F as Fragment } from "./client-entry.8e8c4916.js";
+import { a as jsx, j as jsxs, F as Fragment } from "./client-entry.949c436d.js";
 const frontmatter = void 0;
 const toc = [{
   "id": "\u6846\u67B6\u5B9A\u4F4D",
@@ -101,11 +101,10 @@ function _createMdxContent(props) {
         className: "lang",
         children: "ts"
       }), jsx(_components.pre, {
-        className: "shiki nord",
+        className: "shiki",
         style: {
           backgroundColor: "#2e3440ff"
         },
-        tabIndex: "0",
         children: jsxs(_components.code, {
           children: [jsxs(_components.span, {
             className: "line",
@@ -190,11 +189,10 @@ function _createMdxContent(props) {
         className: "lang",
         children: "json"
       }), jsx(_components.pre, {
-        className: "shiki nord",
+        className: "shiki",
         style: {
           backgroundColor: "#2e3440ff"
         },
-        tabIndex: "0",
         children: jsxs(_components.code, {
           children: [jsx(_components.span, {
             className: "line",
@@ -394,11 +392,10 @@ function _createMdxContent(props) {
         className: "lang",
         children: "ts"
       }), jsx(_components.pre, {
-        className: "shiki nord",
+        className: "shiki",
         style: {
           backgroundColor: "#2e3440ff"
         },
-        tabIndex: "0",
         children: jsxs(_components.code, {
           children: [jsx(_components.span, {
             className: "line",
@@ -858,11 +855,10 @@ function _createMdxContent(props) {
         className: "lang",
         children: "ts"
       }), jsx(_components.pre, {
-        className: "shiki nord",
+        className: "shiki",
         style: {
           backgroundColor: "#2e3440ff"
         },
-        tabIndex: "0",
         children: jsxs(_components.code, {
           children: [jsx(_components.span, {
             className: "line",
@@ -1260,11 +1256,10 @@ function _createMdxContent(props) {
         className: "lang",
         children: "ts"
       }), jsx(_components.pre, {
-        className: "shiki nord",
+        className: "shiki",
         style: {
           backgroundColor: "#2e3440ff"
         },
-        tabIndex: "0",
         children: jsxs(_components.code, {
           children: [jsxs(_components.span, {
             className: "line",
@@ -1445,11 +1440,10 @@ function _createMdxContent(props) {
         className: "lang",
         children: "ts"
       }), jsx(_components.pre, {
-        className: "shiki nord",
+        className: "shiki",
         style: {
           backgroundColor: "#2e3440ff"
         },
-        tabIndex: "0",
         children: jsxs(_components.code, {
           children: [jsx(_components.span, {
             className: "line",
@@ -2114,7 +2108,7 @@ function _createMdxContent(props) {
         children: ["\n", jsxs(_components.p, {
           children: ["\u5BF9\u4E8E Island \u7EC4\u4EF6\uFF0C\u5FC5\u987B\u8981\u653E\u5230 islands \u76EE\u5F55\uFF0C\u5BF9\u4E8E\u6BD4\u8F83\u590D\u6742\u7684\u5E94\u7528\u800C\u8A00\uFF0C", jsx("span", {
             "data-word-id": "53156824",
-            className: "abbreviate-word",
+            class: "abbreviate-word",
             children: "\u5FC3\u667A"
           }), "\u8D1F\u62C5\u4F1A\u6BD4\u8F83\u91CD\uFF0C\u800C Astro \u5728\u8FD9\u4E00\u65B9\u9762\u8981\u505A\u7684\u66F4\u4F18\u96C5\u4E00\u4E9B\uFF0C\u901A\u8FC7\u7EC4\u4EF6\u6307\u4EE4\u5373\u53EF\u6307\u5B9A island \u7EC4\u4EF6\uFF0C\u5982", jsx(_components.code, {
             children: "<Component client:load />"
@@ -2155,11 +2149,10 @@ function _createMdxContent(props) {
         className: "lang",
         children: "ts"
       }), jsx(_components.pre, {
-        className: "shiki nord",
+        className: "shiki",
         style: {
           backgroundColor: "#2e3440ff"
         },
-        tabIndex: "0",
         children: jsxs(_components.code, {
           children: [jsxs(_components.span, {
             className: "line",
@@ -2478,11 +2471,10 @@ function _createMdxContent(props) {
         className: "lang",
         children: "ts"
       }), jsx(_components.pre, {
-        className: "shiki nord",
+        className: "shiki",
         style: {
           backgroundColor: "#2e3440ff"
         },
-        tabIndex: "0",
         children: jsxs(_components.code, {
           children: [jsxs(_components.span, {
             className: "line",
@@ -2735,11 +2727,10 @@ function _createMdxContent(props) {
         className: "lang",
         children: "ts"
       }), jsx(_components.pre, {
-        className: "shiki nord",
+        className: "shiki",
         style: {
           backgroundColor: "#2e3440ff"
         },
-        tabIndex: "0",
         children: jsxs(_components.code, {
           children: [jsxs(_components.span, {
             className: "line",
@@ -3235,11 +3226,10 @@ function _createMdxContent(props) {
         className: "lang",
         children: "ts"
       }), jsx(_components.pre, {
-        className: "shiki nord",
+        className: "shiki",
         style: {
           backgroundColor: "#2e3440ff"
         },
-        tabIndex: "0",
         children: jsxs(_components.code, {
           children: [jsxs(_components.span, {
             className: "line",
@@ -3871,11 +3861,10 @@ function _createMdxContent(props) {
         className: "lang",
         children: "ts"
       }), jsx(_components.pre, {
-        className: "shiki nord",
+        className: "shiki",
         style: {
           backgroundColor: "#2e3440ff"
         },
-        tabIndex: "0",
         children: jsxs(_components.code, {
           children: [jsx(_components.span, {
             className: "line",
@@ -4456,11 +4445,10 @@ function _createMdxContent(props) {
         className: "lang",
         children: "ts"
       }), jsx(_components.pre, {
-        className: "shiki nord",
+        className: "shiki",
         style: {
           backgroundColor: "#2e3440ff"
         },
-        tabIndex: "0",
         children: jsxs(_components.code, {
           children: [jsxs(_components.span, {
             className: "line",
@@ -4589,7 +4577,7 @@ function _createMdxContent(props) {
     }), "\n", jsxs(_components.p, {
       children: ["\u503C\u5F97\u6CE8\u610F\u7684\u662F\u5BA2\u6237\u7AEF hydrate \u65B9\u6CD5\u7684\u5B9E\u73B0\uFF0C\u4F20\u7EDF\u7684 ", jsx("span", {
         "data-word-id": "44772760",
-        className: "abbreviate-word",
+        class: "abbreviate-word",
         children: "SSR"
       }), " \u4E00\u822C\u90FD\u662F\u76F4\u63A5\u5BF9\u6839\u8282\u70B9\u8C03\u7528 hydrate\uFF0C\u800C\u5728 Islands \u67B6\u6784\u4E2D\uFF0CFresh \u5BF9\u6BCF\u4E2A Island \u8FDB\u884C\u72EC\u7ACB\u6E32\u67D3\uFF0C\u5B9E\u73B0\u5982\u4E0B:"]
     }), "\n", jsxs(_components.blockquote, {
@@ -4602,11 +4590,10 @@ function _createMdxContent(props) {
         className: "lang",
         children: "ts"
       }), jsx(_components.pre, {
-        className: "shiki nord",
+        className: "shiki",
         style: {
           backgroundColor: "#2e3440ff"
         },
-        tabIndex: "0",
         children: jsxs(_components.code, {
           children: [jsxs(_components.span, {
             className: "line",

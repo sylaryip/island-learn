@@ -1,6 +1,6 @@
 import fastGlob from 'fast-glob';
-import path from 'path';
 import { normalizePath } from 'vite';
+import path from 'path';
 
 interface RouteMeta {
   routePath: string;

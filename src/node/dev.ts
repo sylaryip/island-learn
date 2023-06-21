@@ -1,6 +1,6 @@
 import { createServer } from 'vite';
-import { resolveConfig } from './config';
 import { PACKAGE_ROOT } from './constants';
+import { resolveConfig } from './config';
 import { createVitePlugins } from './vitePlugins';
 
 export async function createDevServer(
@@ -9,10 +9,11 @@ export async function createDevServer(
 ) {
   const config = await resolveConfig(root, 'serve', 'development');
   return createServer({
-    root: root,
     plugins: await createVitePlugins(config, restartServer),
     server: {
-      fs: { allow: [PACKAGE_ROOT] }
+      fs: {
+        allow: [PACKAGE_ROOT]
+      }
     }
   });
 }

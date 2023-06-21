@@ -1,10 +1,9 @@
-import { usePageData } from '@runtime';
-import { NavItemWithLink } from 'shared/types';
-
 import styles from './index.module.scss';
+import { NavItemWithLink } from 'shared/types';
+import { usePageData } from '@runtime';
 import { SwitchAppearance } from '../SwitchAppearance';
 
-function MenuItem(item: NavItemWithLink) {
+export function MenuItem({ item }: { item: NavItemWithLink }) {
   return (
     <div className="text-sm font-medium mx-3">
       <a href={item.link} className={styles.link}>
@@ -13,10 +12,10 @@ function MenuItem(item: NavItemWithLink) {
     </div>
   );
 }
+
 export function Nav() {
   const { siteData } = usePageData();
-  const nav = siteData?.themeConfig?.nav ?? [];
-
+  const nav = siteData.themeConfig.nav || [];
   return (
     <header fixed="~" pos="t-0 l-0" w="full" z="10">
       <div
@@ -28,28 +27,29 @@ export function Nav() {
         <div>
           <a
             href="/"
-            className="w-full h-full text-1rem font-semibold flex items-center"
             hover="opacity-60"
+            className="w-full h-full text-1rem font-semibold flex items-center"
           >
             Island.js
           </a>
         </div>
         <div flex="~">
+          {/* 普通菜单 */}
           <div flex="~">
             {nav.map((item) => (
-              <MenuItem key={item.text} {...item} />
+              <MenuItem item={item} key={item.text} />
             ))}
           </div>
+
+          {/* 白天/夜间模式切换 */}
           <div before="menu-item-before" flex="~">
             <SwitchAppearance />
           </div>
-          <div
-            className={styles.socialLinkIcon}
-            before="menu-item-before"
-            ml="2"
-          >
+
+          {/* 相关链接 */}
+          <div className={styles.socialLinkIcon} before="menu-item-before">
             <a href="/">
-              <div className="i-carbon-logo-github w-5 h-5 full-current"></div>
+              <div className="i-carbon-logo-github w-5 h-5 fill-current"></div>
             </a>
           </div>
         </div>

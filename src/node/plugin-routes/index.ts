@@ -1,6 +1,6 @@
+import { PageModule } from 'shared/types';
 import { Plugin } from 'vite';
 import { RouteService } from './RouteService';
-import { PageModule } from 'shared/types';
 // 本质: 把文件目录结构 -> 路由数据
 
 export interface Route {

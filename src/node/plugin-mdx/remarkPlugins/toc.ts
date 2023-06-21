@@ -1,10 +1,9 @@
-import { parse } from 'acorn';
-import Slugger from 'github-slugger';
-import { Root } from 'mdast';
-import type { MdxjsEsm } from 'mdast-util-mdxjs-esm';
-import type { Program } from 'estree-jsx';
 import type { Plugin } from 'unified';
+import Slugger from 'github-slugger';
 import { visit } from 'unist-util-visit';
+import { Root } from 'hast';
+import type { MdxjsEsm, Program } from 'mdast-util-mdxjs-esm';
+import { parse } from 'acorn';
 
 interface TocItem {
   id: string;
@@ -40,6 +39,7 @@ export const remarkPluginToc: Plugin<[], Root> = () => {
         // 结构如下:
         // {
         //   type: 'link',
+        //   children: [
         //     {
         //       type: 'text',
         //       value: 'title'

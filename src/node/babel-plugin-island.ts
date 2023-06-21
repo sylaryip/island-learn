@@ -9,14 +9,16 @@ export default declare((api) => {
   api.assertVersion(7);
 
   const visitor: Visitor<PluginPass> = {
+    // <A __island>
+    // <A.B __island>
     JSXOpeningElement(path, state) {
       const name = path.node.name;
       let bindingName = '';
-
       if (name.type === 'JSXIdentifier') {
         bindingName = name.name;
       } else if (name.type === 'JSXMemberExpression') {
         let object = name.object;
+        // A.B.C
         while (t.isJSXMemberExpression(object)) {
           object = object.object;
         }

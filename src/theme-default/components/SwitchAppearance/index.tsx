@@ -1,16 +1,18 @@
-import { toggle } from '../../logic/toggleAppearance';
 import styles from './index.module.scss';
+import { toggle } from '../../logic/toggleAppearance';
 
 interface SwitchProps {
   onClick?: () => void;
   children: React.ReactNode;
   className?: string;
+  id?: string;
 }
 
 export function Switch(props: SwitchProps) {
   return (
     <button
-      className={`${styles.switch} ${props.className}}`}
+      className={`${styles.switch} ${props.className}`}
+      id={props.id ?? ''}
       type="button"
       role="switch"
       {...(props.onClick ? { onClick: props.onClick } : {})}

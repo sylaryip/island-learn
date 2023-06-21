@@ -1,9 +1,7 @@
 import { Hero } from 'shared/types';
-import { Button } from '../Button';
-
 import styles from './index.module.scss';
-
-export default function HomeHero(props: { hero: Hero }) {
+import { Button } from '../Button/index';
+export function HomeHero(props: { hero: Hero }) {
   const { hero } = props;
   return (
     <div m="auto" p="t-20 x-16 b-16">

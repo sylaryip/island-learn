@@ -1,10 +1,12 @@
-import type { Element, Root } from 'hast';
 import type { Plugin } from 'unified';
 import { visit } from 'unist-util-visit';
+import type { Element, Root } from 'hast';
 
 export const rehypePluginPreWrapper: Plugin<[], Root> = () => {
   return (tree) => {
     visit(tree, 'element', (node) => {
+      // <pre><code>...</code></pre>
+      // 1. 找到 pre 元素
       if (
         node.tagName === 'pre' &&
         node.children[0]?.type === 'element' &&
@@ -15,6 +17,8 @@ export const rehypePluginPreWrapper: Plugin<[], Root> = () => {
         const codeClassName = codeNode.properties?.className?.toString() || '';
         // language-xxx
         const lang = codeClassName.split('-')[1];
+
+        // codeNode.properties.className = '';
 
         const clonedNode: Element = {
           type: 'element',
@@ -30,7 +34,6 @@ export const rehypePluginPreWrapper: Plugin<[], Root> = () => {
         node.properties = node.properties || {};
         node.properties.className = codeClassName;
 
-        // 构造 div 标签的子元素
         node.children = [
           {
             type: 'element',

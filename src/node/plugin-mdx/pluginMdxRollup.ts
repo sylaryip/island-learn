@@ -1,13 +1,13 @@
 import pluginMdx from '@mdx-js/rollup';
+import type { Plugin } from 'vite';
+import remarkPluginGFM from 'remark-gfm';
 import rehypePluginAutolinkHeadings from 'rehype-autolink-headings';
 import rehypePluginSlug from 'rehype-slug';
-import remarkPluginFrontmatter from 'remark-frontmatter';
-import remarkPluginGFM from 'remark-gfm';
 import remarkPluginMDXFrontMatter from 'remark-mdx-frontmatter';
-import shiki from 'shiki';
-import type { Plugin } from 'vite';
+import remarkPluginFrontmatter from 'remark-frontmatter';
 import { rehypePluginPreWrapper } from './rehypePlugins/preWrapper';
 import { rehypePluginShiki } from './rehypePlugins/shiki';
+import shiki from 'shiki';
 import { remarkPluginToc } from './remarkPlugins/toc';
 
 export async function pluginMdxRollup(): Promise<Plugin> {
@@ -38,5 +38,5 @@ export async function pluginMdxRollup(): Promise<Plugin> {
         { highlighter: await shiki.getHighlighter({ theme: 'nord' }) }
       ]
     ]
-  });
+  }) as unknown as Plugin;
 }

@@ -1,10 +1,9 @@
-import assert from 'assert';
-import { MD_REGEX } from 'node/constants';
+import { MD_REGEX } from '../constants';
 import { Plugin } from 'vite';
+import assert from 'assert';
 
 export function pluginMdxHMR(): Plugin {
   let viteReactPlugin: Plugin;
-
   return {
     name: 'vite-plugin-mdx-hmr',
     apply: 'serve',
@@ -15,6 +14,7 @@ export function pluginMdxHMR(): Plugin {
     },
     async transform(code, id, opts) {
       if (MD_REGEX.test(id)) {
+        // Inject babel refresh template code by @vitejs/plugin-react
         assert(typeof viteReactPlugin.transform === 'function');
         const result = await viteReactPlugin.transform?.call(
           this,
@@ -25,15 +25,15 @@ export function pluginMdxHMR(): Plugin {
         const selfAcceptCode = 'import.meta.hot.accept();';
         if (
           typeof result === 'object' &&
-          !result?.code?.includes(selfAcceptCode)
+          !result!.code?.includes(selfAcceptCode)
         ) {
-          result.code += selfAcceptCode;
+          result!.code += selfAcceptCode;
         }
         return result;
       }
     },
     handleHotUpdate(ctx) {
-      if (/\.mdx$/.test(ctx.file)) {
+      if (/\.mdx?/.test(ctx.file)) {
         ctx.server.ws.send({
           type: 'custom',
           event: 'mdx-changed',

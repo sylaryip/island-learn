@@ -8146,23 +8146,24 @@ var loadable$2 = loadable;
 loadable$2.lib = loadable$1;
 var lazy$2 = lazy;
 lazy$2.lib = lazy$1;
-const Route0 = loadable$2(() => __vitePreload(() => import("./Counter.bae12e43.js"), true ? [] : void 0));
-const Route1 = loadable$2(() => __vitePreload(() => import("./a.f61b94bd.js"), true ? [] : void 0));
-const Route2 = loadable$2(() => __vitePreload(() => import("./b.f1e4d32e.js"), true ? [] : void 0));
-const Route3 = loadable$2(() => __vitePreload(() => import("./c.1c5f531e.js"), true ? [] : void 0));
-const Route4 = loadable$2(() => __vitePreload(() => import("./index.4d90db2e.js"), true ? [] : void 0));
-const Route5 = loadable$2(() => __vitePreload(() => import("./index.26227ae9.js"), true ? [] : void 0));
+const Route0 = loadable$2(() => __vitePreload(() => import("./Counter.247e68cf.js"), true ? [] : void 0));
+const Route1 = loadable$2(() => __vitePreload(() => import("./b.41603d4e.js"), true ? [] : void 0));
+const Route2 = loadable$2(() => __vitePreload(() => import("./a.c3790bf8.js"), true ? [] : void 0));
+const Route3 = loadable$2(() => __vitePreload(() => import("./b.1b453016.js"), true ? [] : void 0));
+const Route4 = loadable$2(() => __vitePreload(() => import("./c.1d8dfff2.js"), true ? [] : void 0));
+const Route5 = loadable$2(() => __vitePreload(() => import("./index.62503bdb.js"), true ? [] : void 0));
+const Route6 = loadable$2(() => __vitePreload(() => import("./index.00d5ebe6.js"), true ? [] : void 0));
 const routes = [
-  { path: "/Counter", element: React.createElement(Route0), preload: () => __vitePreload(() => import("./Counter.bae12e43.js"), true ? [] : void 0) },
-  { path: "/guide/a", element: React.createElement(Route1), preload: () => __vitePreload(() => import("./a.f61b94bd.js"), true ? [] : void 0) },
-  { path: "/guide/b", element: React.createElement(Route2), preload: () => __vitePreload(() => import("./b.f1e4d32e.js"), true ? [] : void 0) },
-  { path: "/guide/c", element: React.createElement(Route3), preload: () => __vitePreload(() => import("./c.1c5f531e.js"), true ? [] : void 0) },
-  { path: "/guide/", element: React.createElement(Route4), preload: () => __vitePreload(() => import("./index.4d90db2e.js"), true ? [] : void 0) },
-  { path: "/", element: React.createElement(Route5), preload: () => __vitePreload(() => import("./index.26227ae9.js"), true ? [] : void 0) }
+  { path: "/Counter", element: React.createElement(Route0), preload: () => __vitePreload(() => import("./Counter.247e68cf.js"), true ? [] : void 0) },
+  { path: "/b", element: React.createElement(Route1), preload: () => __vitePreload(() => import("./b.41603d4e.js"), true ? [] : void 0) },
+  { path: "/guide/a", element: React.createElement(Route2), preload: () => __vitePreload(() => import("./a.c3790bf8.js"), true ? [] : void 0) },
+  { path: "/guide/b", element: React.createElement(Route3), preload: () => __vitePreload(() => import("./b.1b453016.js"), true ? [] : void 0) },
+  { path: "/guide/c", element: React.createElement(Route4), preload: () => __vitePreload(() => import("./c.1d8dfff2.js"), true ? [] : void 0) },
+  { path: "/guide/", element: React.createElement(Route5), preload: () => __vitePreload(() => import("./index.62503bdb.js"), true ? [] : void 0) },
+  { path: "/", element: React.createElement(Route6), preload: () => __vitePreload(() => import("./index.00d5ebe6.js"), true ? [] : void 0) }
 ];
-const siteData = { "title": "xxx", "description": "SSG Framework", "themeConfig": { "nav": [{ "text": "\u4E3B\u9875", "link": "/" }, { "text": "\u6307\u5357", "link": "/guide/" }], "sidebar": { "/guide/": [{ "text": "\u6559\u7A0B", "items": [{ "text": "\u5FEB\u901F\u4E0A\u624B", "link": "/guide/a" }, { "text": "\u5982\u4F55\u5B89\u88C5", "link": "/guide/b" }, { "text": "\u6CE8\u610F\u4E8B\u9879", "link": "/guide/c" }] }] } }, "vite": {} };
 /**
- * @remix-run/router v1.6.3
+ * @remix-run/router v1.0.3
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -8218,29 +8219,13 @@ function createBrowserHistory(options) {
   }
   return getUrlBasedHistory(createBrowserLocation, createBrowserHref, null, options);
 }
-function invariant(value, message) {
-  if (value === false || value === null || typeof value === "undefined") {
-    throw new Error(message);
-  }
-}
-function warning(cond, message) {
-  if (!cond) {
-    if (typeof console !== "undefined")
-      console.warn(message);
-    try {
-      throw new Error(message);
-    } catch (e2) {
-    }
-  }
-}
 function createKey() {
   return Math.random().toString(36).substr(2, 8);
 }
-function getHistoryState(location2, index) {
+function getHistoryState(location2) {
   return {
     usr: location2.state,
-    key: location2.key,
-    idx: index
+    key: location2.key
   };
 }
 function createLocation(current, to, state, key) {
@@ -8288,6 +8273,11 @@ function parsePath(path) {
   }
   return parsedPath;
 }
+function createURL(location2) {
+  let base2 = typeof window !== "undefined" && typeof window.location !== "undefined" && window.location.origin !== "null" ? window.location.origin : "unknown://unknown";
+  let href = typeof location2 === "string" ? location2 : createPath(location2);
+  return new URL(href, base2);
+}
 function getUrlBasedHistory(getLocation, createHref, validateLocation, options) {
   if (options === void 0) {
     options = {};
@@ -8299,29 +8289,12 @@ function getUrlBasedHistory(getLocation, createHref, validateLocation, options) 
   let globalHistory = window2.history;
   let action = Action.Pop;
   let listener = null;
-  let index = getIndex();
-  if (index == null) {
-    index = 0;
-    globalHistory.replaceState(_extends$1({}, globalHistory.state, {
-      idx: index
-    }), "");
-  }
-  function getIndex() {
-    let state = globalHistory.state || {
-      idx: null
-    };
-    return state.idx;
-  }
   function handlePop() {
     action = Action.Pop;
-    let nextIndex = getIndex();
-    let delta = nextIndex == null ? null : nextIndex - index;
-    index = nextIndex;
     if (listener) {
       listener({
         action,
-        location: history.location,
-        delta
+        location: history.location
       });
     }
   }
@@ -8330,22 +8303,17 @@ function getUrlBasedHistory(getLocation, createHref, validateLocation, options) 
     let location2 = createLocation(history.location, to, state);
     if (validateLocation)
       validateLocation(location2, to);
-    index = getIndex() + 1;
-    let historyState = getHistoryState(location2, index);
+    let historyState = getHistoryState(location2);
     let url = history.createHref(location2);
     try {
       globalHistory.pushState(historyState, "", url);
     } catch (error) {
-      if (error instanceof DOMException && error.name === "DataCloneError") {
-        throw error;
-      }
       window2.location.assign(url);
     }
     if (v5Compat && listener) {
       listener({
         action,
-        location: history.location,
-        delta: 1
+        location: history.location
       });
     }
   }
@@ -8354,23 +8322,15 @@ function getUrlBasedHistory(getLocation, createHref, validateLocation, options) 
     let location2 = createLocation(history.location, to, state);
     if (validateLocation)
       validateLocation(location2, to);
-    index = getIndex();
-    let historyState = getHistoryState(location2, index);
+    let historyState = getHistoryState(location2);
     let url = history.createHref(location2);
     globalHistory.replaceState(historyState, "", url);
     if (v5Compat && listener) {
       listener({
         action,
-        location: history.location,
-        delta: 0
+        location: history.location
       });
     }
-  }
-  function createURL(to) {
-    let base2 = window2.location.origin !== "null" ? window2.location.origin : window2.location.href;
-    let href = typeof to === "string" ? to : createPath(to);
-    invariant(base2, "No window.location.(origin|href) available to create URL for href: " + href);
-    return new URL(href, base2);
   }
   let history = {
     get action() {
@@ -8393,14 +8353,13 @@ function getUrlBasedHistory(getLocation, createHref, validateLocation, options) 
     createHref(to) {
       return createHref(window2, to);
     },
-    createURL,
-    encodeLocation(to) {
-      let url = createURL(to);
-      return {
+    encodeLocation(location2) {
+      let url = createURL(createPath(location2));
+      return _extends$1({}, location2, {
         pathname: url.pathname,
         search: url.search,
         hash: url.hash
-      };
+      });
     },
     push,
     replace,
@@ -8447,9 +8406,9 @@ function flattenRoutes(routes2, branches, parentsMeta, parentPath) {
   if (parentPath === void 0) {
     parentPath = "";
   }
-  let flattenRoute = (route, index, relativePath) => {
+  routes2.forEach((route, index) => {
     let meta = {
-      relativePath: relativePath === void 0 ? route.path || "" : relativePath,
+      relativePath: route.path || "",
       caseSensitive: route.caseSensitive === true,
       childrenIndex: index,
       route
@@ -8475,36 +8434,8 @@ function flattenRoutes(routes2, branches, parentsMeta, parentPath) {
       score: computeScore(path, route.index),
       routesMeta
     });
-  };
-  routes2.forEach((route, index) => {
-    var _route$path;
-    if (route.path === "" || !((_route$path = route.path) != null && _route$path.includes("?"))) {
-      flattenRoute(route, index);
-    } else {
-      for (let exploded of explodeOptionalSegments(route.path)) {
-        flattenRoute(route, index, exploded);
-      }
-    }
   });
   return branches;
-}
-function explodeOptionalSegments(path) {
-  let segments = path.split("/");
-  if (segments.length === 0)
-    return [];
-  let [first, ...rest] = segments;
-  let isOptional = first.endsWith("?");
-  let required = first.replace(/\?$/, "");
-  if (rest.length === 0) {
-    return isOptional ? [required, ""] : [required];
-  }
-  let restExploded = explodeOptionalSegments(rest.join("/"));
-  let result = [];
-  result.push(...restExploded.map((subpath) => subpath === "" ? required : [required, subpath].join("/")));
-  if (isOptional) {
-    result.push(...restExploded);
-  }
-  return result.map((exploded) => path.startsWith("/") && exploded === "" ? "/" : exploded);
 }
 function rankRouteBranches(branches) {
   branches.sort((a, b2) => a.score !== b2.score ? b2.score - a.score : compareIndexes(a.routesMeta.map((meta) => meta.childrenIndex), b2.routesMeta.map((meta) => meta.childrenIndex)));
@@ -8602,9 +8533,9 @@ function compilePath(path, caseSensitive, end) {
   }
   warning(path === "*" || !path.endsWith("*") || path.endsWith("/*"), 'Route path "' + path + '" will be treated as if it were ' + ('"' + path.replace(/\*$/, "/*") + '" because the `*` character must ') + "always follow a `/` in the pattern. To get rid of this warning, " + ('please change the route path to "' + path.replace(/\*$/, "/*") + '".'));
   let paramNames = [];
-  let regexpSource = "^" + path.replace(/\/*\*?$/, "").replace(/^\/*/, "/").replace(/[\\.*+^$?{}|()[\]]/g, "\\$&").replace(/\/:(\w+)/g, (_, paramName) => {
+  let regexpSource = "^" + path.replace(/\/*\*?$/, "").replace(/^\/*/, "/").replace(/[\\.*+^$?{}|()[\]]/g, "\\$&").replace(/:(\w+)/g, (_, paramName) => {
     paramNames.push(paramName);
-    return "/([^\\/]+)";
+    return "([^\\/]+)";
   });
   if (path.endsWith("*")) {
     paramNames.push("*");
@@ -8647,15 +8578,37 @@ function stripBasename(pathname, basename) {
   }
   return pathname.slice(startIndex) || "/";
 }
+function invariant(value, message) {
+  if (value === false || value === null || typeof value === "undefined") {
+    throw new Error(message);
+  }
+}
+function warning(cond, message) {
+  if (!cond) {
+    if (typeof console !== "undefined")
+      console.warn(message);
+    try {
+      throw new Error(message);
+    } catch (e2) {
+    }
+  }
+}
 const joinPaths = (paths) => paths.join("/").replace(/\/\/+/g, "/");
 const normalizePathname = (pathname) => pathname.replace(/\/+$/, "").replace(/^\/*/, "/");
-function isRouteErrorResponse(error) {
-  return error != null && typeof error.status === "number" && typeof error.statusText === "string" && typeof error.internal === "boolean" && "data" in error;
+class ErrorResponse {
+  constructor(status, statusText, data) {
+    this.status = status;
+    this.statusText = statusText || "";
+    this.data = data;
+  }
 }
-const validMutationMethodsArr = ["post", "put", "patch", "delete"];
-["get", ...validMutationMethodsArr];
+function isRouteErrorResponse(e2) {
+  return e2 instanceof ErrorResponse;
+}
+const validActionMethods = /* @__PURE__ */ new Set(["POST", "PUT", "PATCH", "DELETE"]);
+/* @__PURE__ */ new Set(["GET", "HEAD", ...validActionMethods]);
 /**
- * React Router v6.13.0
+ * React Router v6.4.3
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -8678,16 +8631,77 @@ function _extends() {
   };
   return _extends.apply(this, arguments);
 }
-const START_TRANSITION = "startTransition";
-var startTransitionImpl = React$1[START_TRANSITION];
-const DataRouterContext = /* @__PURE__ */ react.exports.createContext(null);
+function isPolyfill(x2, y2) {
+  return x2 === y2 && (x2 !== 0 || 1 / x2 === 1 / y2) || x2 !== x2 && y2 !== y2;
+}
+const is = typeof Object.is === "function" ? Object.is : isPolyfill;
+const {
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useDebugValue
+} = React$1;
+function useSyncExternalStore$2(subscribe, getSnapshot, getServerSnapshot) {
+  const value = getSnapshot();
+  const [{
+    inst
+  }, forceUpdate] = useState({
+    inst: {
+      value,
+      getSnapshot
+    }
+  });
+  useLayoutEffect(() => {
+    inst.value = value;
+    inst.getSnapshot = getSnapshot;
+    if (checkIfSnapshotChanged(inst)) {
+      forceUpdate({
+        inst
+      });
+    }
+  }, [subscribe, value, getSnapshot]);
+  useEffect(() => {
+    if (checkIfSnapshotChanged(inst)) {
+      forceUpdate({
+        inst
+      });
+    }
+    const handleStoreChange = () => {
+      if (checkIfSnapshotChanged(inst)) {
+        forceUpdate({
+          inst
+        });
+      }
+    };
+    return subscribe(handleStoreChange);
+  }, [subscribe]);
+  useDebugValue(value);
+  return value;
+}
+function checkIfSnapshotChanged(inst) {
+  const latestGetSnapshot = inst.getSnapshot;
+  const prevValue = inst.value;
+  try {
+    const nextValue = latestGetSnapshot();
+    return !is(prevValue, nextValue);
+  } catch (error) {
+    return true;
+  }
+}
+function useSyncExternalStore$1(subscribe, getSnapshot, getServerSnapshot) {
+  return getSnapshot();
+}
+const canUseDOM = !!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined");
+const isServerEnvironment = !canUseDOM;
+const shim = isServerEnvironment ? useSyncExternalStore$1 : useSyncExternalStore$2;
+"useSyncExternalStore" in React$1 ? ((module) => module.useSyncExternalStore)(React$1) : shim;
+const DataStaticRouterContext = /* @__PURE__ */ react.exports.createContext(null);
 const DataRouterStateContext = /* @__PURE__ */ react.exports.createContext(null);
 const NavigationContext = /* @__PURE__ */ react.exports.createContext(null);
 const LocationContext = /* @__PURE__ */ react.exports.createContext(null);
 const RouteContext = /* @__PURE__ */ react.exports.createContext({
   outlet: null,
-  matches: [],
-  isDataRoute: false
+  matches: []
 });
 const RouteErrorContext = /* @__PURE__ */ react.exports.createContext(null);
 function useInRouterContext() {
@@ -8698,13 +8712,8 @@ function useLocation() {
   return react.exports.useContext(LocationContext).location;
 }
 function useRoutes(routes2, locationArg) {
-  return useRoutesImpl(routes2, locationArg);
-}
-function useRoutesImpl(routes2, locationArg, dataRouterState) {
   !useInRouterContext() ? invariant(false) : void 0;
-  let {
-    navigator: navigator2
-  } = react.exports.useContext(NavigationContext);
+  let dataRouterStateContext = react.exports.useContext(DataRouterStateContext);
   let {
     matches: parentMatches
   } = react.exports.useContext(RouteContext);
@@ -8730,15 +8739,9 @@ function useRoutesImpl(routes2, locationArg, dataRouterState) {
   });
   let renderedMatches = _renderMatches(matches && matches.map((match) => Object.assign({}, match, {
     params: Object.assign({}, parentParams, match.params),
-    pathname: joinPaths([
-      parentPathnameBase,
-      navigator2.encodeLocation ? navigator2.encodeLocation(match.pathname).pathname : match.pathname
-    ]),
-    pathnameBase: match.pathnameBase === "/" ? parentPathnameBase : joinPaths([
-      parentPathnameBase,
-      navigator2.encodeLocation ? navigator2.encodeLocation(match.pathnameBase).pathname : match.pathnameBase
-    ])
-  })), parentMatches, dataRouterState);
+    pathname: joinPaths([parentPathnameBase, match.pathname]),
+    pathnameBase: match.pathnameBase === "/" ? parentPathnameBase : joinPaths([parentPathnameBase, match.pathnameBase])
+  })), parentMatches, dataRouterStateContext || void 0);
   if (locationArg && renderedMatches) {
     return /* @__PURE__ */ jsx(LocationContext.Provider, {
       value: {
@@ -8756,7 +8759,7 @@ function useRoutesImpl(routes2, locationArg, dataRouterState) {
   }
   return renderedMatches;
 }
-function DefaultErrorComponent() {
+function DefaultErrorElement() {
   let error = useRouteError();
   let message = isRouteErrorResponse(error) ? error.status + " " + error.statusText : error instanceof Error ? error.message : JSON.stringify(error);
   let stack = error instanceof Error ? error.stack : null;
@@ -8765,10 +8768,13 @@ function DefaultErrorComponent() {
     padding: "0.5rem",
     backgroundColor: lightgrey
   };
-  let devInfo = null;
+  let codeStyles = {
+    padding: "2px 4px",
+    backgroundColor: lightgrey
+  };
   return /* @__PURE__ */ jsxs(Fragment, {
     children: [/* @__PURE__ */ jsx("h2", {
-      children: "Unexpected Application Error!"
+      children: "Unhandled Thrown Error!"
     }), /* @__PURE__ */ jsx("h3", {
       style: {
         fontStyle: "italic"
@@ -8777,16 +8783,24 @@ function DefaultErrorComponent() {
     }), stack ? /* @__PURE__ */ jsx("pre", {
       style: preStyles,
       children: stack
-    }) : null, devInfo]
+    }) : null, /* @__PURE__ */ jsx("p", {
+      children: "\u{1F4BF} Hey developer \u{1F44B}"
+    }), /* @__PURE__ */ jsxs("p", {
+      children: ["You can provide a way better UX than this when your app throws errors by providing your own\xA0", /* @__PURE__ */ jsx("code", {
+        style: codeStyles,
+        children: "errorElement"
+      }), " props on\xA0", /* @__PURE__ */ jsx("code", {
+        style: codeStyles,
+        children: "<Route>"
+      })]
+    })]
   });
 }
-const defaultErrorElement = /* @__PURE__ */ jsx(DefaultErrorComponent, {});
 class RenderErrorBoundary extends react.exports.Component {
   constructor(props) {
     super(props);
     this.state = {
       location: props.location,
-      revalidation: props.revalidation,
       error: props.error
     };
   }
@@ -8796,29 +8810,24 @@ class RenderErrorBoundary extends react.exports.Component {
     };
   }
   static getDerivedStateFromProps(props, state) {
-    if (state.location !== props.location || state.revalidation !== "idle" && props.revalidation === "idle") {
+    if (state.location !== props.location) {
       return {
         error: props.error,
-        location: props.location,
-        revalidation: props.revalidation
+        location: props.location
       };
     }
     return {
       error: props.error || state.error,
-      location: state.location,
-      revalidation: props.revalidation || state.revalidation
+      location: state.location
     };
   }
   componentDidCatch(error, errorInfo) {
     console.error("React Router caught the following error during render", error, errorInfo);
   }
   render() {
-    return this.state.error ? /* @__PURE__ */ jsx(RouteContext.Provider, {
-      value: this.props.routeContext,
-      children: /* @__PURE__ */ jsx(RouteErrorContext.Provider, {
-        value: this.state.error,
-        children: this.props.component
-      })
+    return this.state.error ? /* @__PURE__ */ jsx(RouteErrorContext.Provider, {
+      value: this.state.error,
+      children: this.props.component
     }) : this.props.children;
   }
 }
@@ -8828,9 +8837,9 @@ function RenderedRoute(_ref) {
     match,
     children
   } = _ref;
-  let dataRouterContext = react.exports.useContext(DataRouterContext);
-  if (dataRouterContext && dataRouterContext.static && dataRouterContext.staticContext && (match.route.errorElement || match.route.ErrorBoundary)) {
-    dataRouterContext.staticContext._deepestRenderedBoundaryId = match.route.id;
+  let dataStaticRouterContext = react.exports.useContext(DataStaticRouterContext);
+  if (dataStaticRouterContext && match.route.errorElement) {
+    dataStaticRouterContext._deepestRenderedBoundaryId = match.route.id;
   }
   return /* @__PURE__ */ jsx(RouteContext.Provider, {
     value: routeContext,
@@ -8838,23 +8847,18 @@ function RenderedRoute(_ref) {
   });
 }
 function _renderMatches(matches, parentMatches, dataRouterState) {
-  var _dataRouterState2;
   if (parentMatches === void 0) {
     parentMatches = [];
   }
-  if (dataRouterState === void 0) {
-    dataRouterState = null;
-  }
   if (matches == null) {
-    var _dataRouterState;
-    if ((_dataRouterState = dataRouterState) != null && _dataRouterState.errors) {
+    if (dataRouterState != null && dataRouterState.errors) {
       matches = dataRouterState.matches;
     } else {
       return null;
     }
   }
   let renderedMatches = matches;
-  let errors = (_dataRouterState2 = dataRouterState) == null ? void 0 : _dataRouterState2.errors;
+  let errors = dataRouterState == null ? void 0 : dataRouterState.errors;
   if (errors != null) {
     let errorIndex = renderedMatches.findIndex((m2) => m2.route.id && (errors == null ? void 0 : errors[m2.route.id]));
     !(errorIndex >= 0) ? invariant(false) : void 0;
@@ -8862,55 +8866,29 @@ function _renderMatches(matches, parentMatches, dataRouterState) {
   }
   return renderedMatches.reduceRight((outlet, match, index) => {
     let error = match.route.id ? errors == null ? void 0 : errors[match.route.id] : null;
-    let errorElement = null;
-    if (dataRouterState) {
-      errorElement = match.route.errorElement || defaultErrorElement;
-    }
-    let matches2 = parentMatches.concat(renderedMatches.slice(0, index + 1));
-    let getChildren = () => {
-      let children;
-      if (error) {
-        children = errorElement;
-      } else if (match.route.Component) {
-        children = /* @__PURE__ */ react.exports.createElement(match.route.Component, null);
-      } else if (match.route.element) {
-        children = match.route.element;
-      } else {
-        children = outlet;
-      }
-      return /* @__PURE__ */ jsx(RenderedRoute, {
-        match,
-        routeContext: {
-          outlet,
-          matches: matches2,
-          isDataRoute: dataRouterState != null
-        },
-        children
-      });
-    };
-    return dataRouterState && (match.route.ErrorBoundary || match.route.errorElement || index === 0) ? /* @__PURE__ */ jsx(RenderErrorBoundary, {
+    let errorElement = dataRouterState ? match.route.errorElement || /* @__PURE__ */ jsx(DefaultErrorElement, {}) : null;
+    let getChildren = () => /* @__PURE__ */ jsx(RenderedRoute, {
+      match,
+      routeContext: {
+        outlet,
+        matches: parentMatches.concat(renderedMatches.slice(0, index + 1))
+      },
+      children: error ? errorElement : match.route.element !== void 0 ? match.route.element : outlet
+    });
+    return dataRouterState && (match.route.errorElement || index === 0) ? /* @__PURE__ */ jsx(RenderErrorBoundary, {
       location: dataRouterState.location,
-      revalidation: dataRouterState.revalidation,
       component: errorElement,
       error,
-      children: getChildren(),
-      routeContext: {
-        outlet: null,
-        matches: matches2,
-        isDataRoute: true
-      }
+      children: getChildren()
     }) : getChildren();
   }, null);
 }
 var DataRouterHook$1;
 (function(DataRouterHook2) {
-  DataRouterHook2["UseBlocker"] = "useBlocker";
   DataRouterHook2["UseRevalidator"] = "useRevalidator";
-  DataRouterHook2["UseNavigateStable"] = "useNavigate";
 })(DataRouterHook$1 || (DataRouterHook$1 = {}));
 var DataRouterStateHook$1;
 (function(DataRouterStateHook2) {
-  DataRouterStateHook2["UseBlocker"] = "useBlocker";
   DataRouterStateHook2["UseLoaderData"] = "useLoaderData";
   DataRouterStateHook2["UseActionData"] = "useActionData";
   DataRouterStateHook2["UseRouteError"] = "useRouteError";
@@ -8918,36 +8896,26 @@ var DataRouterStateHook$1;
   DataRouterStateHook2["UseRouteLoaderData"] = "useRouteLoaderData";
   DataRouterStateHook2["UseMatches"] = "useMatches";
   DataRouterStateHook2["UseRevalidator"] = "useRevalidator";
-  DataRouterStateHook2["UseNavigateStable"] = "useNavigate";
-  DataRouterStateHook2["UseRouteId"] = "useRouteId";
 })(DataRouterStateHook$1 || (DataRouterStateHook$1 = {}));
 function useDataRouterState(hookName) {
   let state = react.exports.useContext(DataRouterStateContext);
   !state ? invariant(false) : void 0;
   return state;
 }
-function useRouteContext(hookName) {
-  let route = react.exports.useContext(RouteContext);
-  !route ? invariant(false) : void 0;
-  return route;
-}
-function useCurrentRouteId(hookName) {
-  let route = useRouteContext();
-  let thisRoute = route.matches[route.matches.length - 1];
-  !thisRoute.route.id ? invariant(false) : void 0;
-  return thisRoute.route.id;
-}
 function useRouteError() {
   var _state$errors;
   let error = react.exports.useContext(RouteErrorContext);
   let state = useDataRouterState(DataRouterStateHook$1.UseRouteError);
-  let routeId = useCurrentRouteId(DataRouterStateHook$1.UseRouteError);
+  let route = react.exports.useContext(RouteContext);
+  let thisRoute = route.matches[route.matches.length - 1];
   if (error) {
     return error;
   }
-  return (_state$errors = state.errors) == null ? void 0 : _state$errors[routeId];
+  !route ? invariant(false) : void 0;
+  !thisRoute.route.id ? invariant(false) : void 0;
+  return (_state$errors = state.errors) == null ? void 0 : _state$errors[thisRoute.route.id];
 }
-function Router(_ref5) {
+function Router(_ref4) {
   let {
     basename: basenameProp = "/",
     children = null,
@@ -8955,7 +8923,7 @@ function Router(_ref5) {
     navigationType = Action.Pop,
     navigator: navigator2,
     static: staticProp = false
-  } = _ref5;
+  } = _ref4;
   !!useInRouterContext() ? invariant(false) : void 0;
   let basename = basenameProp.replace(/^\/*/, "/");
   let navigationContext = react.exports.useMemo(() => ({
@@ -8973,30 +8941,30 @@ function Router(_ref5) {
     state = null,
     key = "default"
   } = locationProp;
-  let locationContext = react.exports.useMemo(() => {
+  let location2 = react.exports.useMemo(() => {
     let trailingPathname = stripBasename(pathname, basename);
     if (trailingPathname == null) {
       return null;
     }
     return {
-      location: {
-        pathname: trailingPathname,
-        search,
-        hash,
-        state,
-        key
-      },
-      navigationType
+      pathname: trailingPathname,
+      search,
+      hash,
+      state,
+      key
     };
-  }, [basename, pathname, search, hash, state, key, navigationType]);
-  if (locationContext == null) {
+  }, [basename, pathname, search, hash, state, key]);
+  if (location2 == null) {
     return null;
   }
   return /* @__PURE__ */ jsx(NavigationContext.Provider, {
     value: navigationContext,
     children: /* @__PURE__ */ jsx(LocationContext.Provider, {
       children,
-      value: locationContext
+      value: {
+        location: location2,
+        navigationType
+      }
     })
   });
 }
@@ -9009,7 +8977,7 @@ var AwaitRenderStatus;
 new Promise(() => {
 });
 /**
- * React Router DOM v6.13.0
+ * React Router DOM v6.4.3
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -9022,7 +8990,6 @@ function BrowserRouter(_ref) {
   let {
     basename,
     children,
-    future,
     window: window2
   } = _ref;
   let historyRef = react.exports.useRef();
@@ -9033,17 +9000,11 @@ function BrowserRouter(_ref) {
     });
   }
   let history = historyRef.current;
-  let [state, setStateImpl] = react.exports.useState({
+  let [state, setState] = react.exports.useState({
     action: history.action,
     location: history.location
   });
-  let {
-    v7_startTransition
-  } = future || {};
-  let setState = react.exports.useCallback((newState) => {
-    v7_startTransition && startTransitionImpl ? startTransitionImpl(() => setStateImpl(newState)) : setStateImpl(newState);
-  }, [setStateImpl, v7_startTransition]);
-  react.exports.useLayoutEffect(() => history.listen(setState), [history, setState]);
+  react.exports.useLayoutEffect(() => history.listen(setState), [history]);
   return /* @__PURE__ */ jsx(Router, {
     basename,
     children,
@@ -9071,13 +9032,26 @@ const DataContext = react.exports.createContext({});
 const usePageData = () => {
   return react.exports.useContext(DataContext);
 };
-const link$1 = "_link_158tj_1";
-const socialLinkIcon = "_social-link-icon_158tj_12";
-const nav = "_nav_158tj_22";
+const nav = "_nav_1eoyk_1";
+const link$1 = "_link_1eoyk_7";
+const socialLinkIcon = "_social-link-icon_1eoyk_18";
 const styles$7 = {
+  nav,
   link: link$1,
-  socialLinkIcon,
-  nav
+  socialLinkIcon
+};
+const check = "_check_rbkha_17";
+const icon = "_icon_rbkha_34";
+const dark = "_dark_rbkha_29";
+const sun = "_sun_rbkha_57";
+const moon = "_moon_rbkha_61";
+const styles$6 = {
+  "switch": "_switch_rbkha_1",
+  check,
+  icon,
+  dark,
+  sun,
+  moon
 };
 const APPEARANCE_KEY = "appearance";
 const setClassList = (isDark = false) => {
@@ -9106,22 +9080,11 @@ function toggle() {
     localStorage.setItem(APPEARANCE_KEY, "dark");
   }
 }
-const check = "_check_rbkha_17";
-const icon = "_icon_rbkha_34";
-const dark = "_dark_rbkha_29";
-const sun = "_sun_rbkha_57";
-const moon = "_moon_rbkha_61";
-const styles$6 = {
-  "switch": "_switch_rbkha_1",
-  check,
-  icon,
-  dark,
-  sun,
-  moon
-};
 function Switch(props) {
+  var _a;
   return /* @__PURE__ */ jsx("button", {
-    className: `${styles$6.switch} ${props.className}}`,
+    className: `${styles$6.switch} ${props.className}`,
+    id: (_a = props.id) != null ? _a : "",
     type: "button",
     role: "switch",
     ...props.onClick ? {
@@ -9156,7 +9119,9 @@ function SwitchAppearance() {
     })]
   });
 }
-function MenuItem(item) {
+function MenuItem({
+  item
+}) {
   return /* @__PURE__ */ jsx("div", {
     className: "text-sm font-medium mx-3",
     children: /* @__PURE__ */ jsx("a", {
@@ -9167,11 +9132,10 @@ function MenuItem(item) {
   });
 }
 function Nav() {
-  var _a, _b;
   const {
     siteData: siteData2
   } = usePageData();
-  const nav2 = (_b = (_a = siteData2 == null ? void 0 : siteData2.themeConfig) == null ? void 0 : _a.nav) != null ? _b : [];
+  const nav2 = siteData2.themeConfig.nav || [];
   return /* @__PURE__ */ jsx("header", {
     fixed: "~",
     pos: "t-0 l-0",
@@ -9185,8 +9149,8 @@ function Nav() {
       children: [/* @__PURE__ */ jsx("div", {
         children: /* @__PURE__ */ jsx("a", {
           href: "/",
-          className: "w-full h-full text-1rem font-semibold flex items-center",
           hover: "opacity-60",
+          className: "w-full h-full text-1rem font-semibold flex items-center",
           children: "Island.js"
         })
       }), /* @__PURE__ */ jsxs("div", {
@@ -9194,7 +9158,7 @@ function Nav() {
         children: [/* @__PURE__ */ jsx("div", {
           flex: "~",
           children: nav2.map((item) => /* @__PURE__ */ jsx(MenuItem, {
-            ...item
+            item
           }, item.text))
         }), /* @__PURE__ */ jsx("div", {
           before: "menu-item-before",
@@ -9203,11 +9167,10 @@ function Nav() {
         }), /* @__PURE__ */ jsx("div", {
           className: styles$7.socialLinkIcon,
           before: "menu-item-before",
-          ml: "2",
           children: /* @__PURE__ */ jsx("a", {
             href: "/",
             children: /* @__PURE__ */ jsx("div", {
-              className: "i-carbon-logo-github w-5 h-5 full-current"
+              className: "i-carbon-logo-github w-5 h-5 fill-current"
             })
           })
         })]
@@ -9215,8 +9178,16 @@ function Nav() {
     })
   });
 }
-const link = "_link_r3fql_1";
+const base = "";
+const vars = "";
+const doc = "";
+const __uno = "";
+const clip = "_clip_zensi_1";
 const styles$5 = {
+  clip
+};
+const link = "_link_r3fql_1";
+const styles$4 = {
   link
 };
 const EXTERNAL_URL_RE = /^https?/;
@@ -9233,7 +9204,7 @@ function Link(props) {
     href,
     target,
     rel,
-    className: `${styles$5.link} ${className}`,
+    className: `${styles$4.link} ${className}`,
     children
   });
 }
@@ -9242,7 +9213,7 @@ const medium = "_medium_togsy_14";
 const big = "_big_togsy_21";
 const brand = "_brand_togsy_28";
 const alt = "_alt_togsy_47";
-const styles$4 = {
+const styles$3 = {
   button,
   medium,
   big,
@@ -9264,14 +9235,10 @@ function Button(props) {
     type = external ? "a" : Link;
   }
   return React.createElement(type != null ? type : "a", {
-    className: `${styles$4.button} ${styles$4[theme]} ${styles$4[size]} ${className}`,
+    className: `${styles$3.button} ${styles$3[theme]} ${styles$3[size]} ${className}`,
     href
   }, props.text);
 }
-const clip = "_clip_zensi_1";
-const styles$3 = {
-  clip
-};
 function HomeHero(props) {
   const {
     hero
@@ -9292,7 +9259,7 @@ function HomeHero(props) {
           text: "6xl",
           className: "max-w-576px",
           children: /* @__PURE__ */ jsx("span", {
-            className: styles$3.clip,
+            className: styles$5.clip,
             children: hero.name
           })
         }), /* @__PURE__ */ jsx("p", {
@@ -9333,7 +9300,7 @@ function HomeHero(props) {
     })
   });
 }
-function HomeFeatures(props) {
+function HomeFeature(props) {
   return /* @__PURE__ */ jsx("div", {
     className: "max-w-1152px",
     m: "auto",
@@ -9380,9 +9347,155 @@ function HomeLayout() {
   return /* @__PURE__ */ jsxs("div", {
     children: [/* @__PURE__ */ jsx(HomeHero, {
       hero: frontmatter.hero
-    }), /* @__PURE__ */ jsx(HomeFeatures, {
+    }), /* @__PURE__ */ jsx(HomeFeature, {
       features: frontmatter.features
     })]
+  });
+}
+const sidebar = "_sidebar_16h0y_1";
+const styles$2 = {
+  sidebar
+};
+function Sidebar(props) {
+  const {
+    sidebarData,
+    pathname
+  } = props;
+  const renderGroupItem = (item) => {
+    const active = item.link === pathname;
+    return /* @__PURE__ */ jsx("div", {
+      ml: "5",
+      children: /* @__PURE__ */ jsx("div", {
+        p: "1",
+        block: "~",
+        text: "sm",
+        "font-medium": "~",
+        className: `${active ? "text-brand" : "text-text-2"}`,
+        children: /* @__PURE__ */ jsx(Link, {
+          href: item.link,
+          children: item.text
+        })
+      })
+    });
+  };
+  const renderGroup = (item) => {
+    var _a;
+    return /* @__PURE__ */ jsxs("section", {
+      block: "~",
+      "not-first": "divider-top mt-4",
+      children: [/* @__PURE__ */ jsx("div", {
+        flex: "~",
+        justify: "between",
+        items: "center",
+        children: /* @__PURE__ */ jsx("h2", {
+          m: "t-3 b-2",
+          text: "1rem text-1",
+          font: "bold",
+          children: item.text
+        })
+      }), /* @__PURE__ */ jsx("div", {
+        mb: "1",
+        children: (_a = item.items) == null ? void 0 : _a.map((item2) => /* @__PURE__ */ jsx("div", {
+          children: renderGroupItem(item2)
+        }, item2.link))
+      })]
+    }, item.text);
+  };
+  return /* @__PURE__ */ jsx("aside", {
+    className: styles$2.sidebar,
+    children: /* @__PURE__ */ jsx("nav", {
+      children: sidebarData.map(renderGroup)
+    })
+  });
+}
+const content = "_content_1d34c_1";
+const docContent = "_doc-content_1d34c_8";
+const asideContainer = "_aside-container_1d34c_14";
+const styles$1 = {
+  content,
+  docContent,
+  asideContainer
+};
+const prev = "_prev_6xv5j_1";
+const next = "_next_6xv5j_2";
+const pagerLink = "_pager-link_6xv5j_6";
+const title = "_title_6xv5j_20";
+const desc = "_desc_6xv5j_29";
+const styles = {
+  prev,
+  next,
+  pagerLink,
+  title,
+  desc
+};
+function usePrevNextPage() {
+  var _a;
+  const {
+    pathname
+  } = useLocation();
+  const {
+    siteData: siteData2
+  } = usePageData();
+  const sidebar2 = ((_a = siteData2.themeConfig) == null ? void 0 : _a.sidebar) || {};
+  const flattenTitles = [];
+  Object.keys(sidebar2).forEach((key) => {
+    const groups = sidebar2[key] || [];
+    groups.forEach((group) => {
+      group.items.forEach((item) => {
+        flattenTitles.push(item);
+      });
+    });
+  });
+  const pageIndex = flattenTitles.findIndex((item) => item.link === pathname);
+  const prevPage = flattenTitles[pageIndex - 1] || null;
+  const nextPage = flattenTitles[pageIndex + 1] || null;
+  return {
+    prevPage,
+    nextPage
+  };
+}
+function DocFooter() {
+  const {
+    prevPage,
+    nextPage
+  } = usePrevNextPage();
+  return /* @__PURE__ */ jsx("footer", {
+    mt: "8",
+    children: /* @__PURE__ */ jsxs("div", {
+      flex: "~",
+      gap: "2",
+      "divider-top": "~",
+      pt: "6",
+      children: [/* @__PURE__ */ jsx("div", {
+        flex: "~ col",
+        className: styles.prev,
+        children: prevPage && /* @__PURE__ */ jsxs("a", {
+          href: prevPage.link,
+          className: styles.pagerLink,
+          children: [/* @__PURE__ */ jsx("span", {
+            className: styles.desc,
+            children: "\u4E0A\u4E00\u9875"
+          }), /* @__PURE__ */ jsx("span", {
+            className: styles.title,
+            children: prevPage.text
+          })]
+        })
+      }), /* @__PURE__ */ jsx("div", {
+        flex: "~ col",
+        className: styles.next,
+        children: nextPage && /* @__PURE__ */ jsxs("a", {
+          href: nextPage.link,
+          className: `${styles.pagerLink} ${styles.next}`,
+          children: [/* @__PURE__ */ jsx("span", {
+            className: styles.desc,
+            children: "\u4E0B\u4E00\u9875"
+          }), /* @__PURE__ */ jsx("span", {
+            className: styles.title,
+            children: nextPage.text
+          })]
+        })
+      })]
+    })
   });
 }
 var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
@@ -9577,10 +9690,7 @@ function throttle(func, wait, options) {
 let links = [];
 const NAV_HEIGHT = 56;
 function scrollToTarget(target, isSmooth) {
-  const targetPadding = parseInt(
-    window.getComputedStyle(target).paddingTop,
-    10
-  );
+  const targetPadding = parseInt(window.getComputedStyle(target).paddingTop, 10);
   const targetTop = window.scrollY + target.getBoundingClientRect().top + targetPadding - NAV_HEIGHT;
   window.scrollTo({
     left: 0,
@@ -9591,9 +9701,7 @@ function scrollToTarget(target, isSmooth) {
 function bindingAsideScroll() {
   const marker = document.getElementById("aside-marker");
   const aside = document.getElementById("aside-container");
-  const headers = Array.from((aside == null ? void 0 : aside.getElementsByTagName("a")) || []).map(
-    (item) => decodeURIComponent(item.hash)
-  );
+  const headers = Array.from((aside == null ? void 0 : aside.getElementsByTagName("a")) || []).map((item) => decodeURIComponent(item.hash));
   if (!aside) {
     return;
   }
@@ -9609,9 +9717,7 @@ function bindingAsideScroll() {
     }
   };
   const setActiveLink = () => {
-    links = Array.from(
-      document.querySelectorAll(".island-doc .header-anchor")
-    ).filter((item) => {
+    links = Array.from(document.querySelectorAll(".island-doc .header-anchor")).filter((item) => {
       var _a;
       return ((_a = item.parentElement) == null ? void 0 : _a.tagName) !== "H1";
     });
@@ -9654,9 +9760,9 @@ function useHeaders(initHeaders) {
 }
 function Aside(props) {
   const {
-    headers: rawHeader = []
+    headers: rawHeaders = []
   } = props;
-  const headers = useHeaders(rawHeader);
+  const headers = useHeaders(rawHeaders);
   const hasOutline = headers.length > 0;
   const markerRef = react.exports.useRef(null);
   react.exports.useEffect(() => {
@@ -9715,155 +9821,13 @@ function Aside(props) {
     })
   });
 }
-const prev = "_prev_6xv5j_1";
-const next = "_next_6xv5j_2";
-const pagerLink = "_pager-link_6xv5j_6";
-const title = "_title_6xv5j_20";
-const desc = "_desc_6xv5j_29";
-const styles$2 = {
-  prev,
-  next,
-  pagerLink,
-  title,
-  desc
-};
-function usePrevNextPage() {
-  var _a;
-  const { pathname } = useLocation();
-  const { siteData: siteData2 } = usePageData();
-  const sidebar2 = ((_a = siteData2.themeConfig) == null ? void 0 : _a.sidebar) || {};
-  const flattenTitles = [];
-  Object.keys(sidebar2).forEach((key) => {
-    const groups = sidebar2[key] || [];
-    groups.forEach((group) => {
-      group.items.forEach((item) => {
-        flattenTitles.push(item);
-      });
-    });
-  });
-  const pageIndex = flattenTitles.findIndex((item) => item.link === pathname);
-  const prevPage = flattenTitles[pageIndex - 1] || null;
-  const nextPage = flattenTitles[pageIndex + 1] || null;
-  return {
-    prevPage,
-    nextPage
-  };
-}
-function DocFooter() {
-  const {
-    prevPage,
-    nextPage
-  } = usePrevNextPage();
-  return /* @__PURE__ */ jsx("footer", {
-    mt: "8",
-    children: /* @__PURE__ */ jsxs("div", {
-      flex: "~",
-      gap: "2",
-      "divider-top": "~",
-      pt: "6",
-      children: [/* @__PURE__ */ jsx("div", {
-        flex: "~ col",
-        className: styles$2.prev,
-        children: prevPage && /* @__PURE__ */ jsxs("a", {
-          href: prevPage.link,
-          className: styles$2.pagerLink,
-          children: [/* @__PURE__ */ jsx("span", {
-            className: styles$2.desc,
-            children: "\u4E0A\u4E00\u9875"
-          }), /* @__PURE__ */ jsx("span", {
-            className: styles$2.title,
-            children: prevPage.text
-          })]
-        })
-      }), /* @__PURE__ */ jsx("div", {
-        flex: "~ col",
-        className: styles$2.next,
-        children: nextPage && /* @__PURE__ */ jsxs("a", {
-          href: nextPage.link,
-          className: `${styles$2.pagerLink} ${styles$2.next}`,
-          children: [/* @__PURE__ */ jsx("span", {
-            className: styles$2.desc,
-            children: "\u4E0B\u4E00\u9875"
-          }), /* @__PURE__ */ jsx("span", {
-            className: styles$2.title,
-            children: nextPage.text
-          })]
-        })
-      })]
-    })
-  });
-}
-const sidebar = "_sidebar_16h0y_1";
-const styles$1 = {
-  sidebar
-};
-function Sidebar(props) {
-  const {
-    sidebarData,
-    pathname
-  } = props;
-  const renderGroupItem = (item) => {
-    const active = item.link === pathname;
-    return /* @__PURE__ */ jsx("div", {
-      ml: "5",
-      children: /* @__PURE__ */ jsx("div", {
-        p: "1",
-        block: "~",
-        text: "sm",
-        "font-medium": "~",
-        className: `${active ? "text-brand" : "text-text-2"}`,
-        children: /* @__PURE__ */ jsx(Link, {
-          href: item.link,
-          children: item.text
-        })
-      })
-    });
-  };
-  const renderGroup = (item) => {
-    var _a;
-    return /* @__PURE__ */ jsxs("section", {
-      block: "~",
-      "not-first": "divider-top mt-4",
-      children: [/* @__PURE__ */ jsx("div", {
-        flex: "~",
-        justify: "between",
-        items: "center",
-        children: /* @__PURE__ */ jsx("h2", {
-          m: "t-3 b-2",
-          text: "1rem text-1",
-          font: "bold",
-          children: item.text
-        })
-      }), /* @__PURE__ */ jsx("div", {
-        mb: "1",
-        children: (_a = item.items) == null ? void 0 : _a.map((item2) => /* @__PURE__ */ jsx("div", {
-          children: renderGroupItem(item2)
-        }, item2.link))
-      })]
-    }, item.text);
-  };
-  return /* @__PURE__ */ jsx("aside", {
-    className: styles$1.sidebar,
-    children: /* @__PURE__ */ jsx("nav", {
-      children: sidebarData.map(renderGroup)
-    })
-  });
-}
-const content = "_content_1d34c_1";
-const docContent = "_doc-content_1d34c_8";
-const asideContainer = "_aside-container_1d34c_14";
-const styles = {
-  content,
-  docContent,
-  asideContainer
-};
 function DocLayout() {
-  var _a, _b, _c;
+  var _a;
   const {
     siteData: siteData2,
     toc
   } = usePageData();
-  const sidebarData = (_b = (_a = siteData2.themeConfig) == null ? void 0 : _a.sidebar) != null ? _b : {};
+  const sidebarData = ((_a = siteData2.themeConfig) == null ? void 0 : _a.sidebar) || {};
   const {
     pathname
   } = useLocation();
@@ -9872,33 +9836,30 @@ function DocLayout() {
       return true;
     }
   });
-  const matchedSidebar = (_c = sidebarData[matchedSidebarKey]) != null ? _c : [];
+  const matchedSidebar = sidebarData[matchedSidebarKey] || [];
   return /* @__PURE__ */ jsxs("div", {
     children: [/* @__PURE__ */ jsx(Sidebar, {
       sidebarData: matchedSidebar,
       pathname
     }), /* @__PURE__ */ jsxs("div", {
-      className: styles.content,
+      className: styles$1.content,
       flex: "~",
       children: [/* @__PURE__ */ jsxs("div", {
-        className: styles.docContent,
+        className: styles$1.docContent,
         children: [/* @__PURE__ */ jsx("div", {
           className: "island-doc",
           children: /* @__PURE__ */ jsx(Content, {})
         }), /* @__PURE__ */ jsx(DocFooter, {})]
       }), /* @__PURE__ */ jsx("div", {
-        className: styles.asideContainer,
+        className: styles$1.asideContainer,
         children: /* @__PURE__ */ jsx(Aside, {
-          headers: toc
+          headers: toc,
+          __island: "../../components/Aside/index!!ISLAND!!/Users/sylaryip/Documents/island/island-dev/src/theme-default/Layout/DocLayout/index.tsx"
         })
       })]
     })]
   });
 }
-const __uno = "";
-const base = "";
-const vars = "";
-const doc = "";
 function Layout() {
   const pageData = usePageData();
   const {
@@ -9924,12 +9885,12 @@ function Layout() {
     })]
   });
 }
+const siteData = { "title": "xxx", "description": "SSG Framework", "themeConfig": { "nav": [{ "text": "\u4E3B\u9875", "link": "/" }, { "text": "\u6307\u5357", "link": "/guide/" }], "sidebar": { "/guide/": [{ "text": "\u6559\u7A0B", "items": [{ "text": "\u5FEB\u901F\u4E0A\u624B", "link": "/guide/a" }, { "text": "\u5982\u4F55\u5B89\u88C5", "link": "/guide/b" }, { "text": "\u6CE8\u610F\u4E8B\u9879", "link": "/guide/c" }] }] } }, "vite": {} };
 async function initPageData(routePath) {
   var _a, _b;
   const matched = matchRoutes(routes, routePath);
   if (matched) {
-    const route = matched[0].route;
-    const moduleInfo = await route.preload();
+    const moduleInfo = await matched[0].route.preload();
     return {
       pageType: (_b = (_a = moduleInfo.frontmatter) == null ? void 0 : _a.pageType) != null ? _b : "doc",
       siteData,
@@ -9937,14 +9898,13 @@ async function initPageData(routePath) {
       pagePath: routePath,
       toc: moduleInfo.toc
     };
-  } else {
-    return {
-      pageType: "404",
-      siteData,
-      frontmatter: {},
-      pagePath: routePath
-    };
   }
+  return {
+    pageType: "404",
+    siteData,
+    pagePath: routePath,
+    frontmatter: {}
+  };
 }
 function App() {
   return /* @__PURE__ */ jsx(Layout, {});
